@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StratInsight Digital — Wellness Business Specialists</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F3EF;
+    --bg2: #EDEAE4;
+    --dark: #1A1A1A;
+    --mid: #555;
+    --light: #999;
+    --rule: #CCCAC4;
+    --accent: #1A1A1A;
+    --serif: 'Libre Baskerville', serif;
+    --sans: 'Outfit', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes lineGrow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(245,243,239,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--rule); }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--dark);
+    letter-spacing: 0.3px;
+  }
+  .nav-logo span {
+    font-style: italic;
+    color: var(--mid);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--dark); }
+
+  .nav-cta {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bg) !important;
+    background: var(--dark);
+    padding: 10px 22px;
+    text-decoration: none;
+    transition: opacity 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.8 !important; color: var(--bg) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    font-family: var(--serif);
+    font-size: clamp(120px, 18vw, 260px);
+    font-style: italic;
+    color: rgba(26,26,26,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(42px, 7vw, 96px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--dark);
+    max-width: 900px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--mid);
+  }
+
+  .hero-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 60px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.8;
+    max-width: 420px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--dark);
+    color: var(--bg);
+    padding: 16px 36px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.8; }
+
+  .btn-secondary {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--dark); border-color: var(--dark); }
+
+  .hero-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 40px;
+    transform-origin: left;
+    animation: lineGrow 1s 0.5s ease both;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 120px 48px; }
+
+  .section-tag {
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    max-width: 60px;
+  }
+
+  /* ── STATEMENT ── */
+  .statement {
+    background: var(--dark);
+    padding: 100px 48px;
+  }
+
+  .statement-inner {
+    max-width: 800px;
+  }
+
+  .statement-quote {
+    font-family: var(--serif);
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--bg);
+    line-height: 1.5;
+    margin-bottom: 32px;
+  }
+  .statement-quote em {
+    font-style: normal;
+    color: rgba(245,243,239,0.4);
+  }
+
+  .statement-attr {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(245,243,239,0.3);
+  }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 60px;
+  }
+
+  .service-card {
+    background: var(--bg);
+    padding: 48px 36px;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: var(--dark); }
+  .service-card:hover .service-num { color: rgba(245,243,239,0.2); }
+  .service-card:hover .service-title { color: var(--bg); }
+  .service-card:hover .service-desc { color: rgba(245,243,239,0.5); }
+  .service-card:hover .service-features li { color: rgba(245,243,239,0.6); }
+  .service-card:hover .service-features li::before { background: rgba(245,243,239,0.3); }
+  .service-card:hover .service-price { color: var(--bg); }
+  .service-card:hover .service-rule { background: rgba(245,243,239,0.1); }
+
+  .service-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(26,26,26,0.06);
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.3s;
+  }
+
+  .service-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 12px;
+    transition: color 0.3s;
+  }
+
+  .service-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.7;
+    margin-bottom: 28px;
+    transition: color 0.3s;
+  }
+
+  .service-rule {
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 24px;
+    transition: background 0.3s;
+  }
+
+  .service-features {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+  .service-features li {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--mid);
+    padding: 5px 0;
+    padding-left: 14px;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .service-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 4px;
+    height: 1px;
+    background: var(--rule);
+    transition: background 0.3s;
+  }
+
+  .service-price {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--dark);
+    transition: color 0.3s;
+  }
+  .service-price span {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--light);
+    margin-left: 6px;
+    text-transform: uppercase;
+  }
+
+  /* ── WHY US ── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px 80px;
+    margin-top: 60px;
+  }
+
+  .why-item {}
+  .why-num {
+    font-family: var(--serif);
+    font-size: 11px;
+    font-style: italic;
+    color: var(--light);
+    margin-bottom: 12px;
+  }
+  .why-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+  .why-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+  .why-rule {
+    width: 30px;
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 20px;
+  }
+
+  /* ── PROCESS ── */
+  .process { background: var(--bg2); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 60px;
+  }
+
+  .process-step {
+    background: var(--bg2);
+    padding: 40px 28px;
+  }
+
+  .process-step-num {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--light);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .process-step-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+  .process-step-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+
+  /* ── ABOUT ── */
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-left {}
+  .about-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--dark);
+    margin-bottom: 32px;
+  }
+  .about-title em { font-style: italic; color: var(--mid); }
+
+  .about-text {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+
+  .about-right {}
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 40px;
+  }
+  .about-stat {
+    background: var(--bg);
+    padding: 32px 24px;
+  }
+  .about-stat-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--dark);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .about-stat-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light);
+  }
+
+  .about-team {}
+  .about-team-title {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 20px;
+  }
+  .team-member {
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .team-member:last-child { border-bottom: 1px solid var(--rule); }
+  .team-name {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .team-role {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--light);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .team-bio {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--dark); }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-left {}
+  .contact-tag {
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(245,243,239,0.3);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .contact-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(245,243,239,0.1);
+    max-width: 60px;
+  }
+
+  .contact-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--bg);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .contact-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245,243,239,0.5);
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .contact-details {}
+  .contact-detail {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(245,243,239,0.08);
+  }
+  .contact-detail:last-child { border-bottom: 1px solid rgba(245,243,239,0.08); }
+  .contact-detail-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,243,239,0.3);
+    min-width: 80px;
+  }
+  .contact-detail-value {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245,243,239,0.7);
+  }
+
+  .contact-right {}
+  .contact-form {}
+
+  .form-field {
+    margin-bottom: 20px;
+  }
+  .form-field label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,243,239,0.3);
+    margin-bottom: 8px;
+  }
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    width: 100%;
+    background: rgba(245,243,239,0.04);
+    border: none;
+    border-bottom: 1px solid rgba(245,243,239,0.15);
+    padding: 12px 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-field input::placeholder,
+  .form-field textarea::placeholder {
+    color: rgba(245,243,239,0.2);
+  }
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus {
+    border-color: rgba(245,243,239,0.4);
+  }
+  .form-field textarea {
+    resize: none;
+    height: 80px;
+  }
+  .form-field select {
+    cursor: pointer;
+  }
+  .form-field select option {
+    background: var(--dark);
+    color: var(--bg);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-submit {
+    margin-top: 32px;
+    background: var(--bg);
+    color: var(--dark);
+    border: none;
+    padding: 16px 40px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    width: 100%;
+  }
+  .form-submit:hover { opacity: 0.85; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(245,243,239,0.06);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(245,243,239,0.4);
+  }
+  .footer-logo span { font-style: italic; }
+
+  .footer-copy {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(245,243,239,0.2);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,243,239,0.25);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: rgba(245,243,239,0.6); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px 60px; }
+    .hero-title { font-size: 38px; }
+    .hero-bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
+    .hero-actions { align-items: flex-start; }
+    section { padding: 80px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; gap: 36px; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .about-inner { grid-template-columns: 1fr; gap: 48px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+    .statement { padding: 80px 24px; }
+    .contact { padding: 80px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Strat<span>Insight</span> Digital</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-text">Insight</div>
+  <div class="hero-tag">Wellness Business Specialists</div>
+  <h1 class="hero-title">
+    We help wellness studios<br>
+    grow with <em>strategy</em><br>
+    and <em>insight</em>
+  </h1>
+  <div class="hero-rule"></div>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      Social media management and CRM consulting
+      for yoga studios, gyms, spas and mindfulness
+      businesses — backed by research, driven by results.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get In Touch</a>
+      <a href="#services" class="btn-secondary">View Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<div class="statement">
+  <div class="statement-inner reveal">
+    <p class="statement-quote">
+      "Strategy without data is just guessing.
+      <em>Insight without action is just research.</em>
+      We bring both together to help wellness
+      businesses grow with clarity and confidence."
+    </p>
+    <div class="statement-attr">StratInsight Digital — Our Philosophy</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-tag reveal">What We Do</div>
+  <div class="services-grid reveal">
+
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-title">Social Media Management</div>
+      <div class="service-desc">
+        Consistent, branded content that builds your audience
+        and converts followers into paying clients.
+      </div>
+      <div class="service-rule"></div>
+      <ul class="service-features">
+        <li>Content strategy and calendar</li>
+        <li>Canva graphics and caption writing</li>
+        <li>Instagram and Facebook management</li>
+        <li>Reels and video content</li>
+        <li>Daily engagement management</li>
+        <li>Monthly performance report</li>
+      </ul>
+      <div class="service-price">From $500 <span>/ month</span></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-title">CRM Management</div>
+      <div class="service-desc">
+        Most wellness studios use only 20% of their CRM.
+        We unlock the rest — automating follow-ups and
+        retaining more clients.
+      </div>
+      <div class="service-rule"></div>
+      <ul class="service-features">
+        <li>Wellness Living, Mindbody, Vagaro</li>
+        <li>Lead nurturing sequences</li>
+        <li>Automated booking reminders</li>
+        <li>Re-engagement campaigns</li>
+        <li>Staff training and SOPs</li>
+        <li>Monthly retention report</li>
+      </ul>
+      <div class="service-price">From $600 <span>/ month</span></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-title">Bundle & Save</div>
+      <div class="service-desc">
+        Combine social media and CRM management
+        for a complete growth system — and save
+        up to $400 per month.
+      </div>
+      <div class="service-rule"></div>
+      <ul class="service-features">
+        <li>Full social media management</li>
+        <li>Complete CRM management</li>
+        <li>Unified monthly reporting</li>
+        <li>Single point of contact</li>
+        <li>Priority response time</li>
+        <li>Quarterly strategy review</li>
+      </ul>
+      <div class="service-price">From $1,000 <span>/ month</span></div>
+    </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section style="background:var(--bg2); padding-top:100px; padding-bottom:100px;">
+  <div class="section-tag reveal">Why StratInsight</div>
+  <div class="why-grid">
+
+    <div class="why-item reveal">
+      <div class="why-rule"></div>
+      <div class="why-num">01 —</div>
+      <div class="why-title">Wellness Only</div>
+      <p class="why-desc">We work exclusively with wellness businesses — yoga studios, gyms, spas, mindfulness schools. We speak your language, understand your clients and know your platforms inside out.</p>
+    </div>
+
+    <div class="why-item reveal">
+      <div class="why-rule"></div>
+      <div class="why-num">02 —</div>
+      <div class="why-title">CRM Expertise</div>
+      <p class="why-desc">With 6+ years of hands-on experience in Wellness Living, Mindbody and major wellness CRM platforms — we know these systems better than most studio owners do.</p>
+    </div>
+
+    <div class="why-item reveal">
+      <div class="why-rule"></div>
+      <div class="why-num">03 —</div>
+      <div class="why-title">Research-Backed</div>
+      <p class="why-desc">Every strategy is grounded in qualitative research — we understand what your clients actually want, what makes them stay, and what brings them back after they leave.</p>
+    </div>
+
+    <div class="why-item reveal">
+      <div class="why-rule"></div>
+      <div class="why-num">04 —</div>
+      <div class="why-title">No Lock-In</div>
+      <p class="why-desc">No long-term contracts. No hidden fees. Cancel anytime with 30 days notice. We keep clients through results — not paperwork. Your trust is earned every single month.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-tag reveal">How It Works</div>
+  <div class="process-steps reveal">
+
+    <div class="process-step">
+      <div class="process-step-num">Step 01</div>
+      <div class="process-step-title">Free Audit Call</div>
+      <p class="process-step-desc">We review your current social media and CRM setup — completely free. You'll walk away with clear, actionable recommendations whether you work with us or not.</p>
+    </div>
+
+    <div class="process-step">
+      <div class="process-step-num">Step 02</div>
+      <div class="process-step-title">Onboarding</div>
+      <p class="process-step-desc">A short form and a kickoff call. We learn your brand, your audience and your goals. Within one week we have your first content calendar ready for approval.</p>
+    </div>
+
+    <div class="process-step">
+      <div class="process-step-num">Step 03</div>
+      <div class="process-step-title">We Deliver</div>
+      <p class="process-step-desc">Content designed, scheduled and posted. CRM automated and optimised. You focus on teaching — we handle everything else. Nothing goes live without your approval.</p>
+    </div>
+
+    <div class="process-step">
+      <div class="process-step-num">Step 04</div>
+      <div class="process-step-title">Monthly Report</div>
+      <p class="process-step-desc">Every first Monday of the month you receive a full performance report — what worked, what to improve and what we're doing next. Full transparency, always.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-left reveal">
+      <div class="section-tag">About Us</div>
+      <h2 class="about-title">Strategy meets<br><em>insight.</em><br>Growth follows.</h2>
+      <p class="about-text">StratInsight Digital is a boutique consulting agency built specifically for wellness businesses. We combine deep CRM expertise with research-backed social media strategy to help yoga studios, gyms and mindfulness schools grow their audience and retain more clients.</p>
+      <p class="about-text">We work with a small number of clients at any one time — because quality of service matters more to us than volume. When you work with StratInsight, you get our full attention every single month.</p>
+    </div>
+
+    <div class="about-right reveal">
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-num">6+</div>
+          <div class="about-stat-label">Years CRM Experience</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">Top</div>
+          <div class="about-stat-label">Rated Plus Researcher</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">100%</div>
+          <div class="about-stat-label">Wellness Focused</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">0</div>
+          <div class="about-stat-label">Lock-In Contracts</div>
+        </div>
+      </div>
+
+      <div class="about-team">
+        <div class="about-team-title">Our Team</div>
+        <div class="team-member">
+          <div class="team-name">Sonia</div>
+          <div class="team-role">Co-Founder · Research & Client Strategy</div>
+          <p class="team-bio">Top Rated Plus qualitative researcher with extensive experience working with US and Australian businesses. Leads client communication, content strategy and research.</p>
+        </div>
+        <div class="team-member">
+          <div class="team-name">Co-Founder</div>
+          <div class="team-role">CRM & Business Operations</div>
+          <p class="team-bio">6 years hands-on experience with Wellness Living and Motive — supporting yoga studios, gyms and wellness businesses with CRM setup, automation and operations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <div class="contact-tag">Get In Touch</div>
+      <h2 class="contact-title">Let's talk about<br>your business</h2>
+      <p class="contact-desc">Book a free 20-minute audit call. We'll review your current setup and tell you exactly what we'd do to help — no pressure, no commitment.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value">contact@stratinsightdigital.com</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">WhatsApp</div>
+          <div class="contact-detail-value">Available on request</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Response</div>
+          <div class="contact-detail-value">Within 24 hours</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Speciality</div>
+          <div class="contact-detail-value">Wellness Studios Worldwide</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right reveal">
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Your Name</label>
+            <input type="text" placeholder="e.g. Tammy Williams">
+          </div>
+          <div class="form-field">
+            <label>Business Name</label>
+            <input type="text" placeholder="e.g. Yoga NRG">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-field">
+          <label>I'm interested in</label>
+          <select>
+            <option value="">Select a service</option>
+            <option>Social Media Management</option>
+            <option>CRM Management</option>
+            <option>Bundle Package</option>
+            <option>Free Audit Call First</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Tell us about your business</label>
+          <textarea placeholder="What do you offer? What's your biggest challenge right now?"></textarea>
+        </div>
+        <button class="form-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Strat<span>Insight</span> Digital</div>
+  <div class="footer-copy">© 2026 StratInsight Digital. All rights reserved.</div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
